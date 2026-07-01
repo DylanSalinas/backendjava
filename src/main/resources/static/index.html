@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DylanSalinas - Catalogo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__brand">
+            <h1>DylanSalinas</h1>
+            <p>Gestion de productos</p>
+        </div>
+        <div class="header__actions">
+            <button type="button" id="btnCarrito" class="btn btn--secondary btn--cart">
+                Carrito <span id="cartBadge" class="cart-badge">0</span>
+            </button>
+            <button type="button" id="btnNuevo" class="btn btn--primary">+ Nuevo producto</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search">
+            <div class="search__tabs">
+                <button type="button" class="search__tab search__tab--active" data-mode="nombre">Por nombre</button>
+                <button type="button" class="search__tab" data-mode="id">Por ID</button>
+            </div>
+            <div class="search__row">
+                <input type="text" id="inputBuscar" placeholder="Buscar producto..." class="input">
+                <button type="button" id="btnBuscar" class="btn btn--secondary">Buscar</button>
+                <button type="button" id="btnLimpiar" class="btn btn--ghost">Ver todos</button>
+            </div>
+        </section>
+
+        <p id="mensaje" class="mensaje" hidden></p>
+
+        <section id="grid" class="grid"></section>
+    </main>
+
+    <dialog id="modal" class="modal">
+        <form id="formProducto" class="form">
+            <div class="modal__header">
+                <h2 id="modalTitulo">Producto</h2>
+                <button type="button" id="btnCerrar" class="btn btn--ghost" aria-label="Cerrar">&times;</button>
+            </div>
+
+            <input type="hidden" id="productoId">
+
+            <label class="label">Nombre
+                <input type="text" id="nombre" class="input" required>
+            </label>
+
+            <label class="label">Descripcion
+                <textarea id="descripcion" class="input input--area" rows="3"></textarea>
+            </label>
+
+            <div class="form__row">
+                <label class="label">Precio
+                    <input type="number" id="precio" class="input" min="0.01" step="0.01" required>
+                </label>
+                <label class="label">Stock
+                    <input type="number" id="stock" class="input" min="0" step="1" required>
+                </label>
+            </div>
+
+            <label class="label">Categoria
+                <select id="categoriaId" class="input" required></select>
+            </label>
+
+            <label class="label">URL de imagen
+                <input type="url" id="imagenUrl" class="input" placeholder="https://...">
+            </label>
+
+            <div id="preview" class="preview" hidden>
+                <img id="previewImg" alt="Vista previa">
+            </div>
+
+            <div class="form__actions">
+                <button type="submit" class="btn btn--primary">Guardar</button>
+                <button type="button" id="btnCancelar" class="btn btn--ghost">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="modalCarrito" class="modal modal--cart">
+        <div class="form">
+            <div class="modal__header">
+                <h2>Mi carrito</h2>
+                <button type="button" id="btnCerrarCarrito" class="btn btn--ghost" aria-label="Cerrar">&times;</button>
+            </div>
+            <div id="cartContent" class="cart-content"></div>
+            <div class="cart-footer">
+                <p id="cartTotal" class="cart-total">Total: $0.00</p>
+                <button type="button" id="btnVaciarCarrito" class="btn btn--danger">Vaciar carrito</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
